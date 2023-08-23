@@ -11,22 +11,14 @@ import {
 } from "./Task.styles.js";
 import { useDispatch } from "react-redux";
 import { removeTask } from "../../actions";
-export const Task = ({
-  id,
-  title,
-  completed,
-  onDeleteTask,
-  onEditTask,
-  onTaskCompletionToggle,
-}) => {
+export const Task = ({ id, title, completed }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [isCompleted, setIsCompleted] = useState(completed);
   const handleDeleteTask = () => {
     dispatch(removeTask(id));
   };
-  const handleEditTask = (title) => {
-    onEditTask(id, title);
+  const handleEditTask = () => {
     setIsEdit(false);
   };
 
@@ -48,7 +40,7 @@ export const Task = ({
         <TaskEditor
           id={id}
           title={title}
-          onEditTask={handleEditTask}
+          onHandleEditTask={handleEditTask}
           onReturnBack={handleReturnBack}
         />
       ) : (

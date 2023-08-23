@@ -9,7 +9,8 @@ import {
 } from "./TaskEditor.styles.js";
 import { useDispatch } from "react-redux";
 import { editTask } from "../../actions/index.js";
-export const TaskEditor = ({ title, onEditTask, onReturnBack }) => {
+export const TaskEditor = ({ id, title, onHandleEditTask, onReturnBack }) => {
+  const dispatch = useDispatch();
   const [newTitle, setNewTitle] = useState(title);
 
   const handleTitleChange = (e) => {
@@ -18,8 +19,8 @@ export const TaskEditor = ({ title, onEditTask, onReturnBack }) => {
   const handleSaveNewTitle = () => {
     let title = newTitle.trim();
     if (title) {
-      setNewTitle(title);
-      onEditTask(title);
+      dispatch(editTask(id, title));
+      onHandleEditTask();
     }
   };
 

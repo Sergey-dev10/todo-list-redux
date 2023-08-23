@@ -1,28 +1,14 @@
 import { Task } from "../Task";
 import { NoTasksMessage } from "../NoTasksMessage";
+import { useSelector } from "react-redux";
 
-export const TaskList = ({
-  tasks,
-  onDeleteTask,
-  onEditTask,
-  onTaskCompletionToggle,
-}) => {
+export const TaskList = () => {
+  const tasks = useSelector((state) => state.todo.tasks);
   return (
     <div>
       {tasks.length ? (
         tasks.map((task) => {
-          const { id, title, completed } = task;
-          return (
-            <Task
-              key={id}
-              id={id}
-              title={title}
-              completed={completed}
-              onDeleteTask={onDeleteTask}
-              onEditTask={onEditTask}
-              onTaskCompletionToggle={onTaskCompletionToggle}
-            />
-          );
+          return <Task key={task.id} {...task} />;
         })
       ) : (
         <NoTasksMessage />

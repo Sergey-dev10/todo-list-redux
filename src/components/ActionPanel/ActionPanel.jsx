@@ -10,7 +10,7 @@ export const ActionPanel = ({
   return (
     <ActionPanelWrapper>
       <ToggleAddSearch onHandleToggleAction={onHandleToggleAction} />
-      <Info tasks={tasks} />
+      <Info />
       <Filter onHandleFilter={onHandleFilter} />
     </ActionPanelWrapper>
   );

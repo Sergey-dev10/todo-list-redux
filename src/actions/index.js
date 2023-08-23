@@ -18,9 +18,9 @@ export const removeTask = (id) => ({
   payload: id,
 });
 
-export const editTask = (task) => ({
+export const editTask = (id, title) => ({
   type: actionTypes.EDIT_TASK,
-  payload: task,
+  payload: { id, title },
 });
 
 export const updateTasks = (tasks) => ({
