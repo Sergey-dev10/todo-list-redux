@@ -9,6 +9,8 @@ import {
   ButtonsWrapper,
   Title,
 } from "./Task.styles.js";
+import { useDispatch } from "react-redux";
+import { removeTask } from "../../actions";
 export const Task = ({
   id,
   title,
@@ -17,10 +19,11 @@ export const Task = ({
   onEditTask,
   onTaskCompletionToggle,
 }) => {
+  const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [isCompleted, setIsCompleted] = useState(completed);
   const handleDeleteTask = () => {
-    onDeleteTask(id);
+    dispatch(removeTask(id));
   };
   const handleEditTask = (title) => {
     onEditTask(id, title);
@@ -43,6 +46,7 @@ export const Task = ({
     <TaskWrapper>
       {isEdit ? (
         <TaskEditor
+          id={id}
           title={title}
           onEditTask={handleEditTask}
           onReturnBack={handleReturnBack}

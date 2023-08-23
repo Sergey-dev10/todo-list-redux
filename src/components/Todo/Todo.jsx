@@ -6,58 +6,15 @@ import { ActionPanel } from "../ActionPanel";
 import { Search } from "../Search";
 import { nanoid } from "nanoid";
 import { TodoWrapper } from "./Todo.styles.js";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTasks } from "../../actions/index.js";
 
 export const Todo = () => {
-  const [tasks, setTasks] = useState([
-    // {id: 1, title: "1 task", completed: false},
-    // {id: 2, title: "2 task", completed: false},
-    // {id: 3, title: "3 task", completed: false},
-  ]);
+  const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.todo.tasks);
   const [filter, setFilter] = useState("All");
   const [action, setAction] = useState("add");
   const [searchText, setSearchText] = useState("");
-
-  const handleAddTask = (title) => {
-    const id = nanoid();
-    setTasks((prevState) => [...prevState, { id, title, completed: false }]);
-  };
-  const handleDeleteTask = (id) => {
-    setTasks((prevState) => [
-      ...prevState.filter((task) => {
-        return task.id !== id;
-      }),
-    ]);
-  };
-  const handleEditTask = (id, title) => {
-    setTasks(
-      tasks.map((task) => {
-        return task.id === id ? { ...task, title } : task;
-      }),
-    );
-  };
-
-  const handleTaskCompletionToggle = (id, completed) => {
-    setTasks(
-      tasks.map((task) => {
-        return task.id === id ? { ...task, completed } : task;
-      }),
-    );
-  };
-
-  const handleFilter = (filter) => {
-    setFilter(filter);
-  };
-
-  const handleToggleAction = (action) => {
-    if (action === "add") {
-      setSearchText("");
-    }
-    setAction(action);
-  };
-
-  const handleSearch = (searchText) => {
-    setSearchText(searchText);
-  };
 
   let handledTasks = [];
   if (filter === "All") {
@@ -77,7 +34,7 @@ export const Todo = () => {
   useEffect(() => {
     const storedTasks = localStorage.getItem("tasks");
     if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
+      dispatch(updateTasks(JSON.parse(storedTasks)));
     }
   }, []);
 
@@ -90,23 +47,10 @@ export const Todo = () => {
   return (
     <TodoWrapper>
       <Title />
-      {action === "add" ? (
-        <TaskAdder onAddTask={handleAddTask} />
-      ) : (
-        <Search onHandleSearch={handleSearch} />
-      )}
+      {action === "add" ? <TaskAdder /> : <Search />}
 
-      <TaskList
-        tasks={handledTasks}
-        onDeleteTask={handleDeleteTask}
-        onEditTask={handleEditTask}
-        onTaskCompletionToggle={handleTaskCompletionToggle}
-      />
-      <ActionPanel
-        tasks={tasks}
-        onHandleFilter={handleFilter}
-        onHandleToggleAction={handleToggleAction}
-      />
+      <TaskList />
+      <ActionPanel />
     </TodoWrapper>
   );
 };

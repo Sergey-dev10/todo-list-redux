@@ -7,17 +7,18 @@ import {
   Input,
   ButtonsWrapper,
 } from "./TaskEditor.styles.js";
-
+import { useDispatch } from "react-redux";
+import { editTask } from "../../actions/index.js";
 export const TaskEditor = ({ title, onEditTask, onReturnBack }) => {
-  const [newTitle, steNewTitle] = useState(title);
+  const [newTitle, setNewTitle] = useState(title);
 
   const handleTitleChange = (e) => {
-    steNewTitle(e.target.value);
+    setNewTitle(e.target.value);
   };
   const handleSaveNewTitle = () => {
     let title = newTitle.trim();
     if (title) {
-      steNewTitle(title);
+      setNewTitle(title);
       onEditTask(title);
     }
   };
