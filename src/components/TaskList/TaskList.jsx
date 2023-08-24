@@ -2,8 +2,7 @@ import { Task } from "../Task";
 import { NoTasksMessage } from "../NoTasksMessage";
 import { useSelector } from "react-redux";
 
-export const TaskList = () => {
-  const tasks = useSelector((state) => state.todo.tasks);
+export const TaskList = ({ tasks }) => {
   return (
     <div>
       {tasks.length ? (

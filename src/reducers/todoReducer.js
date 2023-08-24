@@ -1,4 +1,4 @@
-import { actionTypes } from "../actions/index.js";
+import { actionTypes } from "../actions/todoActions.js";
 
 const { ADD_TASK, COMPLETE_TASK, REMOVE_TASK, EDIT_TASK, UPDATE_TASKS } =
   actionTypes;
@@ -13,11 +13,13 @@ export const todoReducer = (state = initialState, action) => {
     case COMPLETE_TASK:
       return {
         ...state,
-        ...state.tasks.map((task) =>
-          task.id === action.payload
-            ? { ...task, completed: !task.completed }
-            : task,
-        ),
+        tasks: [
+          ...state.tasks.map((task) =>
+            task.id === action.payload
+              ? { ...task, completed: !task.completed }
+              : task,
+          ),
+        ],
       };
     case REMOVE_TASK:
       return {

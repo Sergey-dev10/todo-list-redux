@@ -1,8 +1,12 @@
 import { FormWrapper, InputWrapper } from "./Search.styles.js";
-export const Search = ({ onHandleSearch }) => {
+import { useDispatch } from "react-redux";
+import { searchTasks } from "../../actions/searchActions.js";
+export const Search = () => {
+  const dispatch = useDispatch();
   const handleSearch = (e) => {
-    onHandleSearch(e.target.value);
+    dispatch(searchTasks(e.target.value));
   };
+
   return (
     <FormWrapper>
       <InputWrapper type="text" placeholder="Search" onChange={handleSearch} />

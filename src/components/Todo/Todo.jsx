@@ -4,17 +4,16 @@ import { TaskAdder } from "../TaskAdder";
 import { TaskList } from "../TaskList";
 import { ActionPanel } from "../ActionPanel";
 import { Search } from "../Search";
-import { nanoid } from "nanoid";
 import { TodoWrapper } from "./Todo.styles.js";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTasks } from "../../actions/index.js";
+import { updateTasks } from "../../actions/todoActions.js";
 
 export const Todo = () => {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.todo.tasks);
-  const [filter, setFilter] = useState("All");
+  const filter = useSelector((state) => state.filter.filterType);
+  const searchedText = useSelector((state) => state.search.text);
   const [action, setAction] = useState("add");
-  const [searchText, setSearchText] = useState("");
 
   let handledTasks = [];
   if (filter === "All") {
@@ -25,9 +24,9 @@ export const Todo = () => {
     handledTasks = tasks.filter((task) => task.completed === true);
   }
 
-  if (searchText) {
+  if (searchedText) {
     handledTasks = handledTasks.filter(
-      (task) => task.title.indexOf(searchText) !== -1,
+      (task) => task.title.indexOf(searchedText) !== -1,
     );
   }
 
@@ -49,7 +48,7 @@ export const Todo = () => {
       <Title />
       {action === "add" ? <TaskAdder /> : <Search />}
 
-      <TaskList />
+      <TaskList tasks={handledTasks} />
       <ActionPanel />
     </TodoWrapper>
   );

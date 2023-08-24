@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FormWrapper, InputWrapper } from "./TaskAdder.styles.js";
 import { useDispatch } from "react-redux";
-import { addTask } from "../../actions";
+import { addTask } from "../../actions/todoActions.js";
 import { nanoid } from "nanoid";
 
 export const TaskAdder = ({ onAddTask }) => {

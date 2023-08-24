@@ -10,7 +10,7 @@ import {
   Title,
 } from "./Task.styles.js";
 import { useDispatch } from "react-redux";
-import { removeTask } from "../../actions";
+import { removeTask, completeTask } from "../../actions/todoActions.js";
 export const Task = ({ id, title, completed }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
@@ -31,7 +31,7 @@ export const Task = ({ id, title, completed }) => {
 
   const handleTaskCompletionToggle = (e) => {
     setIsCompleted(e.target.checked);
-    onTaskCompletionToggle(id, e.target.checked);
+    dispatch(completeTask(id));
   };
 
   return (

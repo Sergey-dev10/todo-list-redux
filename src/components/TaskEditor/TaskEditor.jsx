@@ -8,7 +8,7 @@ import {
   ButtonsWrapper,
 } from "./TaskEditor.styles.js";
 import { useDispatch } from "react-redux";
-import { editTask } from "../../actions/index.js";
+import { editTask } from "../../actions/todoActions.js";
 export const TaskEditor = ({ id, title, onHandleEditTask, onReturnBack }) => {
   const dispatch = useDispatch();
   const [newTitle, setNewTitle] = useState(title);
