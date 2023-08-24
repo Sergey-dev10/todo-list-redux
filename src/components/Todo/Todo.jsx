@@ -13,7 +13,7 @@ export const Todo = () => {
   const tasks = useSelector((state) => state.todo.tasks);
   const filter = useSelector((state) => state.filter.filterType);
   const searchedText = useSelector((state) => state.search.text);
-  const [action, setAction] = useState("add");
+  const action = useSelector((state) => state.toggle.action);
 
   let handledTasks = [];
   if (filter === "All") {
