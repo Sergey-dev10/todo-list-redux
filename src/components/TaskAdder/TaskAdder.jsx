@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addTask } from "../../actions/todoActions.js";
 import { nanoid } from "nanoid";
 
-export const TaskAdder = ({ onAddTask }) => {
+export const TaskAdder = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
 
@@ -14,7 +14,14 @@ export const TaskAdder = ({ onAddTask }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title) {
-      dispatch(addTask({ id: nanoid(), title: title, completed: false }));
+      dispatch(
+        addTask({
+          id: nanoid(),
+          title: title,
+          completed: false,
+          isEdit: false,
+        }),
+      );
     }
     setTitle("");
   };

@@ -1,29 +1,27 @@
-export const actionTypes = {
-  ADD_TASK: "ADD_TASK",
-  COMPLETE_TASK: "COMPLETE_TASK",
-  REMOVE_TASK: "REMOVE_TASK",
-  EDIT_TASK: "EDIT_TASK",
-  UPDATE_TASKS: "UPDATE_TASKS",
-};
+export const ADD_TASK = "ADD_TASK";
+export const COMPLETE_TASK = "COMPLETE_TASK";
+export const REMOVE_TASK = "REMOVE_TASK";
+export const EDIT_TASK = "EDIT_TASK";
+export const UPDATE_TASKS = "UPDATE_TASKS";
 export const addTask = (task) => ({
-  type: actionTypes.ADD_TASK,
+  type: ADD_TASK,
   payload: task,
 });
 export const completeTask = (id) => ({
-  type: actionTypes.COMPLETE_TASK,
+  type: COMPLETE_TASK,
   payload: id,
 });
 export const removeTask = (id) => ({
-  type: actionTypes.REMOVE_TASK,
+  type: REMOVE_TASK,
   payload: id,
 });
 
-export const editTask = (id, title) => ({
-  type: actionTypes.EDIT_TASK,
-  payload: { id, title },
+export const editTask = (id, title, isEdit) => ({
+  type: EDIT_TASK,
+  payload: { id, title, isEdit },
 });
 
 export const updateTasks = (tasks) => ({
-  type: actionTypes.UPDATE_TASKS,
+  type: UPDATE_TASKS,
   payload: tasks,
 });

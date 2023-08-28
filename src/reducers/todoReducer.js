@@ -1,7 +1,11 @@
-import { actionTypes } from "../actions/todoActions.js";
+import {
+  ADD_TASK,
+  EDIT_TASK,
+  REMOVE_TASK,
+  UPDATE_TASKS,
+  COMPLETE_TASK,
+} from "../actions/todoActions.js";
 
-const { ADD_TASK, COMPLETE_TASK, REMOVE_TASK, EDIT_TASK, UPDATE_TASKS } =
-  actionTypes;
 const initialState = {
   tasks: [],
 };
@@ -32,7 +36,11 @@ export const todoReducer = (state = initialState, action) => {
         tasks: [
           ...state.tasks.map((task) =>
             task.id === action.payload.id
-              ? { ...task, title: action.payload.title }
+              ? {
+                  ...task,
+                  title: action.payload.title,
+                  isEdit: action.payload.isEdit,
+                }
               : task,
           ),
         ],

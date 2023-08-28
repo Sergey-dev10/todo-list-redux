@@ -9,7 +9,7 @@ import {
 } from "./TaskEditor.styles.js";
 import { useDispatch } from "react-redux";
 import { editTask } from "../../actions/todoActions.js";
-export const TaskEditor = ({ id, title, onHandleEditTask, onReturnBack }) => {
+export const TaskEditor = ({ id, title, onReturnBack }) => {
   const dispatch = useDispatch();
   const [newTitle, setNewTitle] = useState(title);
 
@@ -19,13 +19,12 @@ export const TaskEditor = ({ id, title, onHandleEditTask, onReturnBack }) => {
   const handleSaveNewTitle = () => {
     let title = newTitle.trim();
     if (title) {
-      dispatch(editTask(id, title));
-      onHandleEditTask();
+      dispatch(editTask(id, title, false));
     }
   };
 
   const handleReturnBack = () => {
-    onReturnBack();
+    dispatch(editTask(id, title, false));
   };
   return (
     <TaskEditorWrapper>

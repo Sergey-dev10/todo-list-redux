@@ -10,23 +10,20 @@ import {
   Title,
 } from "./Task.styles.js";
 import { useDispatch } from "react-redux";
-import { removeTask, completeTask } from "../../actions/todoActions.js";
-export const Task = ({ id, title, completed }) => {
+import {
+  removeTask,
+  completeTask,
+  editTask,
+} from "../../actions/todoActions.js";
+
+export const Task = ({ id, title, completed, isEdit }) => {
   const dispatch = useDispatch();
-  const [isEdit, setIsEdit] = useState(false);
   const [isCompleted, setIsCompleted] = useState(completed);
   const handleDeleteTask = () => {
     dispatch(removeTask(id));
   };
-  const handleEditTask = () => {
-    setIsEdit(false);
-  };
-
-  const handleReturnBack = () => {
-    setIsEdit(false);
-  };
   const handleEditBtn = () => {
-    setIsEdit(true);
+    dispatch(editTask(id, title, true));
   };
 
   const handleTaskCompletionToggle = (e) => {
@@ -37,12 +34,7 @@ export const Task = ({ id, title, completed }) => {
   return (
     <TaskWrapper>
       {isEdit ? (
-        <TaskEditor
-          id={id}
-          title={title}
-          onHandleEditTask={handleEditTask}
-          onReturnBack={handleReturnBack}
-        />
+        <TaskEditor id={id} title={title} />
       ) : (
         <TaskItem>
           <input
